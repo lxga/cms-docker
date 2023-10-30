@@ -62,18 +62,76 @@ services:
       - "28000"
     depends_on:
       - cms-db
-  cms-proxy:
+  # proxy 
+  cms-proxy-0:
     build: 
       context: .
-      dockerfile: images/cms-proxy/Dockerfile
+      dockerfile: images/cms-proxy/Dockerfile0
     image: "cms-proxy:latest"
-    container_name: "cms-proxy"
+    container_name: "cms-proxy-0"
     restart: unless-stopped
     env_file: 
       - ".env"
       - "config/config.env"
+    environment:
+      - CMS_CONTEST_ID=0
+      - CMS_PROXY_PORT=28600
     expose:
       - "28600"
+    depends_on:
+      - cms-db
+      - cms-web-ranking
+  cms-proxy-1:
+    build: 
+      context: .
+      dockerfile: images/cms-proxy/Dockerfile1
+    image: "cms-proxy:latest"
+    container_name: "cms-proxy-1"
+    restart: unless-stopped
+    env_file: 
+      - ".env"
+      - "config/config.env"
+    environment:
+      - CMS_CONTEST_ID=1
+      - CMS_PROXY_PORT=28601
+    expose:
+      - "28601"
+    depends_on:
+      - cms-db
+      - cms-web-ranking
+  cms-proxy-2:
+    build: 
+      context: .
+      dockerfile: images/cms-proxy/Dockerfile2
+    image: "cms-proxy:latest"
+    container_name: "cms-proxy-2"
+    restart: unless-stopped
+    env_file: 
+      - ".env"
+      - "config/config.env"
+    environment:
+      - CMS_CONTEST_ID=2
+      - CMS_PROXY_PORT=28602
+    expose:
+      - "28602"
+    depends_on:
+      - cms-db
+      - cms-web-ranking
+  cms-proxy-3:
+    build: 
+      context: .
+      dockerfile: images/cms-proxy/Dockerfile3
+    image: "cms-proxy:latest"
+    container_name: "cms-proxy-3"
+    restart: unless-stopped
+    env_file: 
+      - ".env"
+      - "config/config.env"
+    environment:
+      - CMS_CONTEST_ID=3
+      - CMS_PROXY_PORT=28603
+    expose:
+      - "28603"
     depends_on:
       - cms-db
       - cms-web-ranking
@@ -134,10 +192,42 @@ services:
       - cms-worker-3
         
   # web services
-  cms-web-ranking:
+  cms-web-ranking-0:
     build: 
       context: .
-      dockerfile: images/cms-web-ranking/Dockerfile
+      dockerfile: images/cms-web-ranking/Dockerfile0
+    image: "cms-web-ranking:latest"
+    container_name: "cms-web-ranking-0"
+    restart: unless-stopped
+    env_file: 
+      - ".env"
+      - "config/config.env"
+    volumes:
+      - "./data/ranking:/cms/lib/ranking"
+    ports:
+      - "8890:8890"
+    depends_on:
+      - cms-db
+  cms-web-ranking-1:
+    build: 
+      context: .
+      dockerfile: images/cms-web-ranking/Dockerfile1
+    image: "cms-web-ranking:latest"
+    container_name: "cms-web-ranking-1"
+    restart: unless-stopped
+    env_file: 
+      - ".env"
+      - "config/config.env"
+    volumes:
+      - "./data/ranking:/cms/lib/ranking"
+    ports:
+      - "8891:8891"
+    depends_on:
+      - cms-db
+  cms-web-ranking-2:
+    build: 
+      context: .
+      dockerfile: images/cms-web-ranking/Dockerfile2
     image: "cms-web-ranking:latest"
     container_name: "cms-web-ranking"
     restart: unless-stopped
@@ -147,7 +237,23 @@ services:
     volumes:
       - "./data/ranking:/cms/lib/ranking"
     ports:
-      - "8890:8890"
+      - "8892:8892"
+    depends_on:
+      - cms-db
+  cms-web-ranking-3:
+    build: 
+      context: .
+      dockerfile: images/cms-web-ranking/Dockerfile3
+    image: "cms-web-ranking:latest"
+    container_name: "cms-web-ranking"
+    restart: unless-stopped
+    env_file: 
+      - ".env"
+      - "config/config.env"
+    volumes:
+      - "./data/ranking:/cms/lib/ranking"
+    ports:
+      - "8893:8893"
     depends_on:
       - cms-db
   cms-web-admin:

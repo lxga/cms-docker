@@ -14,7 +14,7 @@ fi
 # figure out the contest id that this proxy service targets.
 CONTEST_ID=${CMS_CONTEST_ID:-"DEFAULT"}
 POLL_INTERVAL=${CMS_POLL_INTERVAL:-"15"}
-CMS_PROXY_PORT=28600
+#CMS_PROXY_PORT=28600
 
 # marker file for liveness probes
 echo 1 > /tmp/is-healthy 
