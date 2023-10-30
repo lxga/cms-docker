@@ -184,12 +184,11 @@ services:
       - cms-proxy-1
       - cms-proxy-2
       - cms-proxy-3
-      
       - cms-printing
       - cms-evaluation
       - cms-web-admin
+      - cms-web-ranking-0
       - cms-web-ranking-1
-      - cms-web-ranking-2
       - cms-web-ranking-2
       - cms-web-ranking-3
       - cms-web-contest
