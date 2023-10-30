@@ -80,7 +80,7 @@ services:
       - "28600"
     depends_on:
       - cms-db
-      - cms-web-ranking
+      - cms-web-ranking-0
   cms-proxy-1:
     build: 
       context: .
@@ -98,7 +98,7 @@ services:
       - "28601"
     depends_on:
       - cms-db
-      - cms-web-ranking
+      - cms-web-ranking-1
   cms-proxy-2:
     build: 
       context: .
@@ -116,7 +116,7 @@ services:
       - "28602"
     depends_on:
       - cms-db
-      - cms-web-ranking
+      - cms-web-ranking-2
   cms-proxy-3:
     build: 
       context: .
@@ -134,7 +134,7 @@ services:
       - "28603"
     depends_on:
       - cms-db
-      - cms-web-ranking
+      - cms-web-ranking-3
   cms-printing:
     build: 
       context: .
@@ -180,11 +180,18 @@ services:
       - cms-log
       - cms-scoring
       - cms-resource
-      - cms-proxy
+      - cms-proxy-0
+      - cms-proxy-1
+      - cms-proxy-2
+      - cms-proxy-3
+      
       - cms-printing
       - cms-evaluation
       - cms-web-admin
-      - cms-web-ranking
+      - cms-web-ranking-1
+      - cms-web-ranking-2
+      - cms-web-ranking-2
+      - cms-web-ranking-3
       - cms-web-contest
       - cms-worker-0
       - cms-worker-1
